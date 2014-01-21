@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Faculty view sections | GPA Calc System</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/style.css" rel="stylesheet"/>
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </h:head>
+    <h:body>
+       <ui:composition template="templates/faculty/common.xhtml">
+            <ui:define name="content">
+                <div class="col-lg-9">
+                    <div class="panel panel-primary">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading"><span class="glyphicon glyphicon-folder-open"></span>#{sectionStudentCDI.section.section_name} | Students</div>
+                        <div class="panel-body">
+                            <h:form class="form-horizontal">
+                               
+                                <h:dataTable value="#{sectionStudentCDI.facultyCDI.students}" var="user" class="table table-hover">
+                                      
+                                    <h:column>
+                                        <f:facet name="header">Id</f:facet>
+                                            #{user.id}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">#{texts.firstname}</f:facet>
+                                            #{user.firstname}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">#{texts.lastname}</f:facet>
+                                            #{user.lastname}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">#{texts.email}</f:facet>
+                                            #{user.username}
+                                    </h:column>
+                                     <h:column>
+                                        <f:facet name="header">Grade</f:facet>
+                                        
+                                          #{sectionStudentCDI.getGrade(user)}
+                                    </h:column>
+                                    <h:column>
+                                    <f:facet name="header">Operations</f:facet>
+                                    <h:commandButton value="Add Grade" class="btn btn-default" action="#{sectionStudentCDI.addGradePage(user)}"/>
+                                   
+                                     
+                                    </h:column>
+                                </h:dataTable>
+                                <div class="form-group">
+                                    <div class="col-sm-10">
+                                      <h:outputText value="#{sectionStudentCDI.gradeMessage}" style="color: red"/>  
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                        <div class="panel-footer">
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+       </ui:composition>
+                
+    </h:body>
+</html>
+

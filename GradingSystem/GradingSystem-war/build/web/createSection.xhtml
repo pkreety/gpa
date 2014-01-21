@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Add new section details | GPA Calc System</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/style.css" rel="stylesheet"/>
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </h:head>
+    <h:body>
+    <ui:composition template="templates/admin/common.xhtml">
+            <ui:define name="content">
+                <div class="col-lg-9">
+                    <div class="panel panel-primary">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading"><span class="glyphicon glyphicon-folder-open"></span><span
+                                class="glyphicon glyphicon-plus-sign"></span>Add new section details
+                        </div>
+                        <div class="panel-body">
+                            <h:form class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="course-name" class="col-lg-2 control-label">Section Name:</label>
+
+                                    <div class="col-lg-10"><h:inputText value="#{sectionCDI.section.section_name}" class="form-control" id="course-name" p:placeholder="Name"/></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="section-course" class="col-lg-2 control-label">Course Name: </label>
+
+                                    <div class="col-lg-10"><h:selectOneMenu value="#{sectionCDI.courseId}" class="form-control input-md" id="section-course">
+                                            <f:selectItems value="#{sectionCDI.coursesItemList}" />
+                                        </h:selectOneMenu></div>
+                                </div>
+                                
+                                 <div class="form-group">
+                                    <label for="section-faculty" class="col-lg-2 control-label">Faculty Name: </label>
+
+                                    <div class="col-lg-10"><h:selectOneMenu value="#{sectionCDI.facultyId}" class="form-control input-md" id="section-faculty">
+                                            <f:selectItems value="#{sectionCDI.facultyItemList}" />
+                                        </h:selectOneMenu></div>
+                                </div>
+                                <div class="form-group">
+                                    <!-- add users alert box -->
+                                    <div class="modal fade" id="add-user-section" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                
+                                                <div class="modal-header">
+                                                    <h4>Add students to the section</h4>
+                                                </div>
+                                                <div class="modal-body" style="overflow-y: scroll; max-height: 300px;">
+                                                    <h:dataTable value="#{sectionCDI.students}" var="student" class="table table-hover">
+                                                        <h:column>
+                                                            <f:facet name="header">Select</f:facet>
+                                                            <h:selectBooleanCheckbox value="#{addStudentCDI.checked[student.id]}" />
+                                                        </h:column>
+                                                        <h:column>
+                                                            <f:facet name="header">#</f:facet>
+                                                                #{student.id}
+                                                        </h:column>
+                                                        <h:column>
+                                                            <f:facet name="header">#{texts.firstname}</f:facet>
+                                                                #{student.firstname}
+                                                        </h:column>
+                                                        <h:column>
+                                                            <f:facet name="header">#{texts.lastname}</f:facet>
+                                                                #{student.lastname}
+                                                        </h:column>
+                                                        <h:column>
+                                                            <f:facet name="header">#{texts.email}</f:facet>
+                                                                #{student.username}
+                                                        </h:column>
+                                                    </h:dataTable>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <h:commandLink class="btn btn-default" p:data-dismiss="modal" value="Add" action="#{addStudentCDI.addSTD()}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- add user alert box end -->
+                                </div>
+                                <div class="form-group">
+                                    <label for="year" class="col-lg-2 control-label">Year:</label>
+
+                                    <div class="col-lg-10"><h:inputText value="#{sectionCDI.section.datetime}" class="form-control" id="year" p:placeholder="Year"/></div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                         <h:commandButton class="btn btn-default" type="button" p:name="add-user"
+                                                         p:data-target="#add-user-section" p:data-toggle="modal" value="Add Students"/>
+                                        <h:commandButton value="Save" action="#{sectionCDI.createSection()}"  class="btn btn-primary" style="margin-left:15px;"/>
+                                        <h:commandButton value="Cancel" action="sectionManagement" immediate="true" class="btn btn-danger"  style="margin-left:15px;" />
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                        <div class="panel-footer"></div>
+                    </div>
+                </div>
+            </ui:define>
+    </ui:composition>
+    </h:body>
+</html>
+

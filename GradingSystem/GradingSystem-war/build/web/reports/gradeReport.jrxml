@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="de4c1c41-09f9-43d9-8504-eb0923316750">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="hql">
+		<![CDATA[]]>
+	</queryString>
+	<field name="student_id.firstname" class="java.lang.String"/>
+	<field name="student_id.lastname" class="java.lang.String"/>
+	<field name="section.section_name" class="java.lang.String"/>
+	<field name="section.course.coursename" class="java.lang.String"/>
+	<field name="gpa" class="java.lang.Float"/>
+	<field name="section.course.credit" class="java.lang.Integer"/>
+	<variable name="credit*gpa" class="java.lang.Float" resetType="None">
+		<variableExpression><![CDATA[$F{section.course.credit} * $F{gpa}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.0F]]></initialValueExpression>
+	</variable>
+	<variable name="creditsCount" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{section.course.credit}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.0]]></initialValueExpression>
+	</variable>
+	<variable name="myTotal" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$V{credit*gpa}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.0F]]></initialValueExpression>
+	</variable>
+	<variable name="mygpa" class="java.lang.Float">
+		<variableExpression><![CDATA[(new BigDecimal($V{myTotal})).divide($V{creditsCount},new MathContext('3', RoundingMode.HALF_UP)).floatValue()]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="118" y="0" width="372" height="54" uuid="c959634b-4a6d-45dc-81b8-90a1784b1a94"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[ MAHARISHI UNIVERSITY OF MANAGEMENT STUDENT GRADE REPORT]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="39" height="20" uuid="b37b1f1b-e493-403e-adae-4f57e11a8fd0"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[NAME:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="52" y="0" width="222" height="20" uuid="e8d8436a-1cfa-403c-bdbe-67751846128f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{student_id.firstname}+" "+$F{student_id.lastname}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="19" splitType="Stretch">
+			<staticText>
+				<reportElement x="100" y="0" width="114" height="19" uuid="92fe521b-0d12-4f71-a757-64a4889aa8cb"/>
+				<text><![CDATA[Course]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="1" width="123" height="13" uuid="52e0cfd4-889b-4866-ba2f-e17beebd847e"/>
+				<text><![CDATA[Credits]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="19" uuid="9a97f6b7-a471-496c-a926-40578fa8a273"/>
+				<text><![CDATA[secion]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="17" width="468" height="1" uuid="6a0f8fa3-50f1-44e5-bdac-80a06c1286ba"/>
+			</line>
+			<staticText>
+				<reportElement x="331" y="1" width="100" height="13" uuid="300de3c8-3b48-4a08-9a9d-873100bf340b"/>
+				<text><![CDATA[gpa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="1" width="100" height="16" uuid="3c6ef72e-d6d1-4aec-afd0-06035c0afb9c"/>
+				<text><![CDATA[calculation]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="100" y="5" width="131" height="16" uuid="c02fc36a-7fcd-4d06-818b-829b9b2360fb"/>
+				<textFieldExpression><![CDATA[$F{section.course.coursename}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="231" y="1" width="100" height="20" uuid="f337b61c-a3fe-4b0b-a8fc-32a569c343c4"/>
+				<textFieldExpression><![CDATA[$F{section.course.credit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="4" width="100" height="20" uuid="490974db-a206-4263-a4d8-929e6a7121c9"/>
+				<textFieldExpression><![CDATA[$F{section.section_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="331" y="0" width="100" height="20" uuid="a66d0a0c-fe0f-43c3-b482-912c4253c2e3"/>
+				<textFieldExpression><![CDATA[$F{gpa}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="431" y="0" width="100" height="20" uuid="0cc16dde-899e-4fa5-80ba-edde5d0036fc"/>
+				<textFieldExpression><![CDATA[$V{credit*gpa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="38">
+			<textField>
+				<reportElement x="222" y="18" width="100" height="13" uuid="e1824f20-ffc0-4f04-b23b-75f82d79dd48"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="50">
+			<textField>
+				<reportElement x="231" y="1" width="100" height="20" uuid="8c951f9d-5f8b-4a59-9376-3360cef4aa84"/>
+				<textFieldExpression><![CDATA[$V{creditsCount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="431" y="0" width="100" height="20" uuid="3024f429-e605-4b92-801b-3a5a16ff4f91"/>
+				<textFieldExpression><![CDATA[$V{myTotal}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="531" height="1" uuid="2bb4525c-e853-4050-b737-4cb2ab353b00"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="20" width="64" height="17" uuid="47632c23-81b9-443e-9a83-552366ff1cc7"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL GPA:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="64" y="20" width="70" height="16" uuid="bdc92951-cdcf-4eff-81be-7d5e950dab6c"/>
+				<textFieldExpression><![CDATA[$V{mygpa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

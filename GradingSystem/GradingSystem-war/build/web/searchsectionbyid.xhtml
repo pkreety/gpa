@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Search sections | GPA Calc System</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/style.css" rel="stylesheet"/>
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/stuff/common.xhtml">
+            <ui:define name="content">
+                <div class="col-lg-9">
+                    <div class="panel panel-primary">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading"><span class="glyphicon glyphicon-search"></span><span class="glyphicon glyphicon-folder-open"></span>Search sections</div>
+                        <div class="panel-body">
+                            <h:form class="form-inline" p:role="form">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Section id</th>
+                                            <th>Section Name</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><h:inputText value="#{searchCourseStaffCDI.id}" class="form-control" p:placeholder="Section id"/></td>
+                                            <td><h:inputText value="#{searchCourseStaffCDI.section.section_name}" class="form-control" p:placeholder="Section name" disabled="true"/></td>
+                                            <td>
+                                                <h:commandLink class="btn btn-default" type="submit" p:name="search" action="#{searchCourseStaffCDI.searchSectionById(searchCourseStaffCDI.id)}">
+                                                    <span class="glyphicon glyphicon-search"></span>Search</h:commandLink>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </h:form>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            <span class="glyphicon glyphicon-folder-open"></span>Section info
+                                        </div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover">
+                                                <tr>
+                                                    <td class="text-muted">Section id</td>
+                                                    <td>#{searchCourseStaffCDI.section.id}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-muted">Section name</td>
+                                                    <td>#{searchCourseStaffCDI.section.section_name}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-muted">Time</td>
+                                                    <td>#{searchCourseStaffCDI.section.datetime}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-muted">Enrolled</td>
+                                                    <td>#{searchCourseStaffCDI.section.students.size()}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-muted">Professor</td>
+                                                    <td>#{searchCourseStaffCDI.section.faculty.lastname}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading"><span class="glyphicon glyphicon-briefcase"></span>Assigned course</div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Course id</th>
+                                                        <th>Course name</th>
+                                                        <th>Course Code</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>#{searchCourseStaffCDI.section.course.id}</td>
+                                                        <td>#{searchCourseStaffCDI.section.course.coursename}</td>
+                                                        <td>#{searchCourseStaffCDI.section.course.course_code}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div>
+                                <!--                                <button class="btn btn-default btn-sm" type="submit" name="section-generate">Generate report</button>-->
+                                <h:outputLink id="link1"  class="btn btn-default btn-sm">
+                                    <h:outputText value="Generate report" />
+                                </h:outputLink>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

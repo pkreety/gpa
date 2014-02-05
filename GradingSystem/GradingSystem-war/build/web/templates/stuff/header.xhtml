@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <body>
+        <ui:composition> 
+            <div class="navbar navbar-inverse navbar-static-top">
+                <div class="container">
+                    <a href="#" class="navbar-brand"><span class="glyphicon glyphicon-home"></span>GPA Calc System</a>
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="collapse navbar-collapse navHeaderCollapse">
+                          <h:form>
+
+                            <ul class="nav navbar-nav navbar-right">
+
+                                <li><h:commandLink action="searchstdbyid" title="Search the students">
+                                        <span class="glyphicon glyphicon-user"></span>
+                                    </h:commandLink>
+                                </li>
+                                <li>
+                                    <h:commandLink action="searchcoursebyid" title="Search the courses">
+                                        <span class="glyphicon glyphicon-briefcase"></span>
+                                    </h:commandLink>
+                                </li>
+                                <li>
+                                    <h:commandLink action="searchsectionbyid" title="Search the sections">
+                                        <span class="glyphicon glyphicon-folder-open"></span>
+                                    </h:commandLink>
+                                </li>
+                                 <li>
+                                    <h:commandLink action="searchtransactions" title="Search the transactions">
+                                        <span class="glyphicon glyphicon-transfer"></span>
+                                    </h:commandLink>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Staff<b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <h:commandLink action="#{loginCDI.logout}" class="logout">
+                                                <span class="glyphicon glyphicon-off"></span>
+                                                Logout
+                                            </h:commandLink>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+            <!-- top navbar end-->
+        </ui:composition>	
+    </body>
+</html>

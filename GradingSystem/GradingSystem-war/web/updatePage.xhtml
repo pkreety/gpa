@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Edit course details | GPA Calc System</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/style.css" rel="stylesheet"/>
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/admin/common.xhtml">
+            <ui:define name="content">
+                <div class="col-lg-9">
+                    <div class="panel panel-primary">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading"><span class="glyphicon glyphicon-briefcase"></span><span class="glyphicon glyphicon-pencil"></span>Edit course details</div>
+                        <div class="panel-body">
+                            <h:form class="form-horizontal">
+                                <h:inputHidden value="#{courseCDI.course.id}"/>
+                                <div class="form-group">
+                                    <label for="course-name" class="col-lg-2 control-label">Course Name: </label>
+
+                                    <div class="col-lg-10"><h:inputText value="#{courseCDI.course.coursename}" class="form-control" id="course-name" p:placeholder="Course name"/></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="course-credits" class="col-lg-2 control-label">Credits: </label>
+
+                                    <div class="col-lg-10"><h:inputText value="#{courseCDI.course.credit}" class="form-control" id="course-credits" p:placeholder="Course credits"/></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="course-code" class="col-lg-2 control-label">Course Code: </label>
+
+                                    <div class="col-lg-10"><h:inputText value="#{courseCDI.course.course_code}" class="form-control" id="course-code" p:placeholder="Course code"/></div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10"><h:commandButton value="Delete" action="#{courseCDI.deleteCourse()}"  class="btn btn-danger"/>
+                                        <h:commandButton value="Save" action="#{courseCDI.finalUpdate()}" class="btn btn-primary" style="margin-left:15px;"/>
+                                        <h:commandButton value="Back" action="courseManagement" class="btn btn-primary"  style="margin-left:15px;"/>
+
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                        <div class="panel-footer"></div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+
+        <!-- delete user alert box -->
+        <div class="modal fade" id="delete-course" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Delete the user</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>You are about to delete the user.</p>
+                        <a href="#" class="btn btn-default" data-dismiss="modal">No</a>
+                        <a href="#" class="btn btn-primary">Yes</a>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- delete user alert box end -->
+    </h:body>
+</html>
+

@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Search courses | GPA Calc System</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/style.css" rel="stylesheet"/>
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/stuff/common.xhtml">
+            <ui:define name="content">
+                <div class="col-lg-9">
+                    <div class="panel panel-primary">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading"><span class="glyphicon glyphicon-search"></span><span
+                                class="glyphicon glyphicon-briefcase"></span>Search courses
+                        </div>
+                        <div class="panel-body">
+                            <h:form class="form-inline">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Course id</th>
+                                            <th>Course Name</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+
+                                            <td><h:inputText value="#{searchCourseStaffCDI.id}" class="form-control" p:placeholder="Course id"/></td>
+                                            <td><h:inputText value="#{searchCourseStaffCDI.course.coursename}" class="form-control" p:placeholder="Course name" disabled="true"/></td>
+                                            <td>
+                                                <h:commandButton value="Search" action="#{searchCourseStaffCDI.searchCourseById(searchCourseStaffCDI.id)}" class="btn btn-default" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </h:form>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            <span class="glyphicon glyphicon-briefcase"></span>Course details
+                                        </div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover">
+                                                <tr>
+                                                    <td class="text-muted">Course id</td>
+                                                    <td>#{searchCourseStaffCDI.course.id}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-muted">Course name</td>
+                                                    <td>#{searchCourseStaffCDI.course.coursename}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-muted">Course code</td>
+                                                    <td>#{searchCourseStaffCDI.course.course_code}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading"><span class="glyphicon glyphicon-folder-open"></span>Related
+                                            sections
+                                        </div>
+                                        <div class="panel-body">
+
+                                            <h:dataTable value="#{searchCourseStaffCDI.sections}" var="section" class="table table-hover">
+                                                <h:column>
+                                                    <f:facet name="header">Id</f:facet>
+                                                        #{section.id}
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Section</f:facet>
+                                                        #{section.section_name}
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Time</f:facet>
+                                                        #{section.datetime}
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Enrolled</f:facet>
+                                                        #{section.students.size()}
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Prof.</f:facet>
+                                                        #{section.faculty.lastname}
+                                                </h:column>
+                                            </h:dataTable>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div>
+                                <button class="btn btn-default btn-sm" type="submit" name="course-generate">Generate report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>    
+    </h:body>
+</html>
+

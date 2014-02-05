@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Complete your Registeration in the system | GPA Calc System</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/style.css" rel="stylesheet"/>
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </h:head>
+    <h:body class="register">
+        <div class="container">
+            <div class="panel panel-default panel-primary">
+                <div class="panel-heading"><span class="glyphicon glyphicon-list-alt"></span>Registration | GPA Calc System</div>
+                <div class="panel-body">
+                    <h:form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="register-name" class="col-lg-2 control-label">#{texts.firstname}</label>
+                                <div class="col-lg-10"><h:inputText value="#{registrationCDI.user.firstname}" class="form-control" id="register-name" p:placeholder="First name"/></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="register-lastname" class="col-lg-2 control-label">#{texts.lastname} </label>
+                                <div class="col-lg-10"><h:inputText value="#{registrationCDI.user.lastname}" class="form-control" id="register-lastname" p:placeholder="Last name"/></div>
+                            </div>
+                            <label for="register-email" class="col-lg-2 control-label">#{texts.email}</label>
+
+                            <div class="col-lg-10"><h:inputText value="#{registrationCDI.user.username}" class="form-control" id="register-email"  disabled="true"/></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password" class="col-lg-2 control-label">#{texts.password}</label>
+                            <div class="col-lg-10"><h:inputSecret value="#{registrationCDI.user.password}" class="form-control" id="register-pasword"  disabled="true"/></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-securityc" class="col-lg-2 control-label">#{texts.securityCode} </label>
+                            <div class="col-lg-10"><h:inputText value="#{registrationCDI.user.securityCode}" class="form-control" id="register-securityc" disabled="true"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-securitya" class="col-lg-2 control-label">#{texts.securityQuestion} </label>
+
+                            <div class="col-lg-10"><h:inputText value="#{registrationCDI.user.securitAnswer}" class="form-control" id="register-securitya"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-street" class="col-lg-2 control-label">#{texts.address}</label>
+                            <div class="col-lg-10"><h:inputText value="#{registrationCDI.user.address.street}" class="form-control" id="register-street" p:placeholder="Security Code"/></div>
+                        </div>
+                        <h:inputHidden value="#{registrationCDI.user.id}" />
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <h:commandButton value="Update" action="#{registrationCDI.finalUpdatestd(registrationCDI.user.id)}" class="btn btn-primary"/>
+                                <h:commandButton value="Cancel" action="listusers" immediate="true" class="btn btn-danger" style="margin-left:15px;"/>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        <!-- container -->
+
+        <!-- footer -->
+        <div class="navbar navbar-default navbar-fixed-bottom">
+            <div class="container">
+                <p class="navbar-text pull-left">GPA Calc System &copy; Group 6</p>
+                <a href="#" class="btn btn-info pull-right navbar-btn">Contact Us</a>
+            </div>
+        </div>
+        <!-- footer end-->
+    </h:body>
+</html>
+
